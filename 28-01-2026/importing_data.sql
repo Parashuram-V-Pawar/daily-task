@@ -132,23 +132,3 @@ SELECT Customer_ID, SUM(sales) AS Total_sales
 FROM orders_data
 GROUP BY Customer_ID
 HAVING COUNT(*) > 5 AND AVG(Sales) > 500
-
-
-
-
-
-
-
-
-CREATE TABLE orders (
-    Row ID,Order ID,Order Date,Ship Date,Ship Mode,Customer ID,Customer Name,Segment,Country,City,State,Postal Code,Region,Product ID,Category,Sub-Category,Product Name,Sales
-)
-
-BULK INSERT orders_data
-FROM 'train.csv'
-WITH (
-    FIRSTROW = 2,
-    FIELDTERMINATOR = ',',
-    ROWTERMINATOR = '\n'
-);
-
