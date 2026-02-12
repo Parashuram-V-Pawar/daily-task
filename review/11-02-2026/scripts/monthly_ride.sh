@@ -1,5 +1,25 @@
 #!/bin/bash
 
+# TASK 3: Monthly Ride Volume Per App
+# Business Question:
+#  Which months had peak ride demand?
+# Extract:
+# Year-Month from trip_start_time
+# Output Example:
+# Uber_2016-07   12000
+# Gett_2017-12    8000
+# Mapper:
+# Extract yyyy-mm
+# Emit (app + "_" + yyyy-mm, 1)
+# Reducer:
+# Sum counts
+# Concepts Tested:
+# Date parsing
+# Composite key
+# Time-based analytics
+
+
+
 HADOOP_STREAMING_JAR=$HADOOP_HOME/share/hadoop/tools/lib/hadoop-streaming-*.jar
 
 INPUT_PATH=/rides/raw/uber-rides-dataset.csv

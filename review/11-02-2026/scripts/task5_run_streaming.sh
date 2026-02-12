@@ -15,7 +15,6 @@
 # Use TreeMap in Reducer
 # Chain second MapReduce job
 
-
 INPUT_FILE=/rides/raw/uber-rides-dataset.csv
 OUTPUT_FILE=/rides/output/task5
 
