@@ -18,8 +18,8 @@
 INPUT_FILE=/rides/raw/uber-rides-dataset.csv
 OUTPUT_FILE=/rides/output/task5
 
-MAPPER=streaming/top5_mapper.py
-REDUCER=streaming/top5_reducer.py
+MAPPER=streaming/most_active_mapper.py
+REDUCER=streaming/most_active_reducer.py
 
 echo "delete the output directory if already exists"
 hdfs dfs -rm -r -f $OUTPUT_FILE
@@ -28,8 +28,8 @@ echo "start generating hadoop data.."
 hadoop jar $HADOOP_HOME/share/hadoop/tools/lib/hadoop-streaming-*.jar \
 -input $INPUT_FILE \
 -output $OUTPUT_FILE \
--mapper "python3 top5_mapper.py" \
--reducer "python3 top5_reducer.py" \
+-mapper "python3 most_active_mapper.py" \
+-reducer "python3 most_active_reducer.py" \
 -file $MAPPER \
 -file $REDUCER
 
