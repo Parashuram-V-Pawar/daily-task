@@ -5,11 +5,21 @@ import csv
 
 reader = csv.reader(sys.stdin)
 
-for cols in reader:
-    if len(cols) < 10 or cols[1] == "trip_status":
-        continue
-    status = cols[1].strip()
-    app = cols[2].strip()
+for row in reader:
+    try:
+        # Skip header
+        if row[0] == "trip_completed_at":
+            continue
 
-    if status.upper() == "COMPLETED":
-        print(f"{app}\t1")
+        # Ensure row has enough columns
+        if len(row) < 3:
+            continue
+
+        status = row[1].strip()
+        app = row[2].strip()
+
+        if status.lower() == "completed":
+            print(f"{app}\t1")
+
+    except Exception:
+        continue

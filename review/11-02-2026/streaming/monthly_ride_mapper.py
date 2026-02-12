@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
-
 import sys
 import csv
 
 data = csv.reader(sys.stdin)
 
 for cols in data:
+    if len(cols) < 8:
+        continue
+
     if cols[7] == 'trip_start_time':
         continue
 
@@ -15,6 +17,3 @@ for cols in data:
     year_month = trip_start_time[:7]
 
     print(f"{app}_{year_month}\t1")
-
-
-

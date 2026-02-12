@@ -1,20 +1,23 @@
 #!/bin/bash
+INPUT_FILE=/rides/raw/uber-rides-dataset.csv
+OUTPUT_FILE=/rides/output/task2
 
-echo " delete the output directory if already exits"
-hdfs dfs -rm -r -f /rides/output/
+MAPPER=streaming/mapper_completed.py
+REDUCER=streaming/reducer_completed.py
 
-echo "start generating hadoop data.."
+echo "Deleting old task2 output if exists..."
+hdfs dfs -rm -r -f $OUTPUT_FILE
+
+echo "Starting Hadoop Streaming Job..."
+
 hadoop jar $HADOOP_HOME/share/hadoop/tools/lib/hadoop-streaming-*.jar \
--input /rides/raw/uber-rides-dataset.csv \
--output /rides/output \
+-input $INPUT_FILE \
+-output $OUTPUT_FILE \
 -mapper "python3 mapper_completed.py" \
+-combiner "python3 reducer_completed.py" \
 -reducer "python3 reducer_completed.py" \
--file mapper_completed.py \
--file reducer_completed.py
+-file $MAPPER \
+-file $REDUCER
 
-
-echo "checking if output generated"
-hdfs dfs -ls /rides/output
-
-echo "showing output"
-hdfs dfs -cat /rides/output/part-00000
+echo "Showing output..."
+hdfs dfs -cat $OUTPUT_FILE/part-00000
